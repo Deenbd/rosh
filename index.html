@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enter password : Secure Website</title>
+    <link href="logo.png" rel="icon" />
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,83 +14,116 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #cccccc;
+            background-color: #7eaecf;
         }
+
         .container {
             text-align: center;
             background: #cccccc;
             padding: 30px;
             border-radius: 10px;
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
         }
+
+        h3 {
+            font-size: 18px;
+        }
+
         h5 {
             margin-bottom: 20px;
+            font-size: 14px;
         }
+
         .password-wrapper {
             position: relative;
-            display: inline-block;
-            width: 80%;
-        }
-        input[type="password"], input[type="text"] {
             width: 100%;
-            padding: 10px;
+            margin-bottom: 25px;
+        }
+
+        input[type="password"],
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
             font-size: 16px;
             border: 1px solid #ddd;
             border-radius: 5px;
+            box-sizing: border-box;
         }
-        .error-message {
-            color: red;
-            margin-top: 10px;
-            font-size: 14px;
-            display: none; /* ডিফল্টভাবে ত্রুটি বার্তা লুকানো থাকবে */
-        }
+
         .toggle-password {
             position: absolute;
             top: 50%;
             right: 10px;
             transform: translateY(-50%);
             cursor: pointer;
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
         }
+
+        .error-message {
+            color: red;
+            margin-bottom: 15px;
+            font-size: 14px;
+            display: none;
+        }
+
         button {
+            width: 100%;
             background-color: #007bff;
             color: #fff;
-            padding: 15px 30px;
+            padding: 14px;
             font-size: 18px;
             border: none;
             border-radius: 25px;
             cursor: pointer;
-            transition: background-color 0.3s;
-            margin-top: 20px;
         }
+
         button:hover {
             background-color: #0056b3;
         }
+
+        @media (max-width: 480px) {
+            h3 {
+                font-size: 16px;
+            }
+
+            button {
+                font-size: 16px;
+            }
+        }
     </style>
+
     <script>
         function checkPassword() {
-            const password = document.getElementById('password').value;
+            const password = document.getElementById('password').value.trim();
             const errorMessage = document.getElementById('error-message');
-            const validPasswords = ["CLSREC.2"]; // অনুমোদিত পাসওয়ার্ডের তালিকা
 
-            if (validPasswords.includes(password)) {
-                errorMessage.style.display = "none"; // ত্রুটি বার্তা লুকান
-                window.open("https://sites.google.com/view/deen-academy/batch-2/join-rec", "_blank");
-            } else {
+            if (password === "22679") {
+                errorMessage.style.display = "none";
+                window.open("https://deenbd.github.io/rosh/set", "_blank");
+            } 
+            else if (password === "22270") {
+                errorMessage.style.display = "none";
+                window.open("https://deenbd.github.io/rosh/ok", "_blank");
+            } 
+            else {
                 errorMessage.textContent = "পাসওয়ার্ডটি সঠিক নয়! আবার চেষ্টা করুন!";
-                errorMessage.style.display = "block"; // ত্রুটি বার্তা দেখান
+                errorMessage.style.display = "block";
             }
         }
 
         function togglePasswordVisibility() {
             const passwordField = document.getElementById('password');
             const icon = document.getElementById('toggle-icon');
+
             if (passwordField.type === 'password') {
                 passwordField.type = 'text';
-                icon.src = "showeye.png"; // পাসওয়ার্ড দেখানোর আইকন
+                icon.src = "showeye.png";
             } else {
                 passwordField.type = 'password';
-                icon.src = "hideeye.png"; // পাসওয়ার্ড লুকানোর আইকন
+                icon.src = "hideeye.png";
             }
         }
 
@@ -101,16 +136,26 @@
         });
     </script>
 </head>
+
 <body>
     <div class="container">
         <h3>ওয়েবসাইটের নিরাপত্তার জন্য মূল পেইজে ঢুকতে পাসওয়ার্ড দিন:</h3>
         <h5>পাসওয়ার্ড জানেন না? বসে থাকুন।</h5>
+
         <div class="password-wrapper">
             <input type="password" id="password" placeholder="পাসওয়ার্ড লিখুন">
-            <img class="toggle-password" id="toggle-icon" src="hideeye.png" onclick="togglePasswordVisibility()">
+            <img
+                class="toggle-password"
+                id="toggle-icon"
+                src="hideeye.png"
+                onclick="togglePasswordVisibility()"
+                alt="toggle password"
+            >
         </div>
-        <div id="error-message" class="error-message"></div> <!-- ত্রুটি বার্তার জন্য div -->
-        <button onclick="checkPassword()">ঢুকুন</button>
+
+        <div id="error-message" class="error-message"></div>
+
+        <button onclick="checkPassword()">Start</button>
     </div>
 </body>
 </html>
