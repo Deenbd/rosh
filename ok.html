@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OK</title>
+<link href="logo.png" rel="icon" />
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #7eaecf;
+}
+
+/* 🔑 Center horizontally only */
+.page {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.container {
+    background: #cccccc;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 420px;
+    box-sizing: border-box;
+}
+
+h3 {
+    font-size: 16px;
+    text-align: center;
+}
+h5 {
+    font-size: 14px;
+    text-align: center;
+}
+
+/* 🖼️ Image viewer – NO fake height */
+.image-viewer {
+    width: 100%;
+    max-height: 320px;
+    overflow: auto;
+    border: 1px solid #999;
+    border-radius: 8px;
+    background: #eee;
+    margin: 15px 0;
+}
+
+.image-viewer img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transform-origin: top left;
+}
+
+/* 🔍 Zoom */
+.zoom-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.zoom-controls button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    background: #007bff;
+    color: #fff;
+}
+
+.password-wrapper {
+    position: relative;
+    margin-top: 10px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 22px;
+    cursor: pointer;
+}
+
+.error-message {
+    color: red;
+    display: none;
+    margin-top: 8px;
+    text-align: center;
+}
+
+.submit-btn {
+    width: 100%;
+    margin-top: 10px;
+    padding: 14px;
+    font-size: 18px;
+    border-radius: 25px;
+    border: none;
+    background: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+</style>
+
+<script>
+let zoom = 1;
+
+function zoomIn() {
+    zoom = Math.min(3, zoom + 0.2);
+    applyZoom();
+}
+function zoomOut() {
+    zoom = Math.max(1, zoom - 0.2);
+    applyZoom();
+}
+function applyZoom() {
+    document.getElementById("zoomImage").style.transform =
+        `scale(${zoom})`;
+}
+
+function checkPassword() {
+    const pw = document.getElementById("password").value.trim();
+    const err = document.getElementById("error-message");
+
+    if (pw === "150") {
+        err.style.display = "none";
+        window.open("https://deenbd.github.io/rosh/set", "_blank");
+    } else {
+        err.style.display = "block";
+        err.innerText = "পাসওয়ার্ডটি সঠিক নয়!";
+    }
+}
+
+function togglePasswordVisibility() {
+    const p = document.getElementById("password");
+    const i = document.getElementById("toggle-icon");
+    p.type = p.type === "password" ? "text" : "password";
+    i.src = p.type === "password" ? "hideeye.png" : "showeye.png";
+}
+</script>
+</head>
+
+<body>
+<div class="page">
+<div class="container">
+
+<h4>উরাফি ভাষা, রুফতোস দেশ আর উরফ জাতি সম্পর্কে জানতে চান? নিচের স্ক্রিনশটের ম্যাসেজটি পড়ুন। ছবির নিচের বোতাম চেপে যুম করে (মোবাইলে) দুই আঙুল দ্বারা সরাতে পারবেন।</h4>
+
+<div class="image-viewer">
+    <img id="zoomImage" src="urof.png" alt="">
+</div>
+
+<div class="zoom-controls">
+    <button onclick="zoomOut()">−</button>
+    <button onclick="zoomIn()">+</button>
+</div>
+
+<h4>ছক পেতে চাইলে আরেক দফা পাসওয়ার্ড লাগবে!</h4>
+
+<div class="password-wrapper">
+    <input type="password" id="password" placeholder="পাসওয়ার্ড লিখুন">
+    <img id="toggle-icon" class="toggle-password"
+         src="hideeye.png"
+         onclick="togglePasswordVisibility()">
+</div>
+
+<div id="error-message" class="error-message"></div>
+
+<button class="submit-btn" onclick="checkPassword()">Start</button>
+
+</div>
+</div>
+</body>
+</html>
